@@ -1,64 +1,61 @@
-import { useEffect, useState } from "react";
-import { Button, Container, Form, ListGroup } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { BsPlus, BsSearch } from "react-icons/bs";
+import { useDispatch } from "react-redux";
 import { addTodo } from "../redux/actions";
 
 const TodoForm = () => {
   const dispatch = useDispatch();
+  const [newTodoText, setNewTodoText] = useState('');
 
-  const tasks = useSelector((state) => state.taskReducer.tasks);
+  const handleAddTodo = (text) =>{
+    dispatch(addTodo(text));
+  }
 
-  const [task, setTask] = useState("");
-
-  useEffect(() => {
-    dispatch(addTodo());
-  }, [dispatch]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!task.trim()) return;
-
-    const taskId = Date.now();
-    dispatch(
-      addTodo({
-        id: taskId,
-        text: task,
-      })
-    );
-    setTask("");
-  };
+  const handleAddTodoClick = ()=>{
+    if (newTodoText.trim() !== ""){
+      
+    }
+  }
+  // console.log(newTodoText);
 
   return (
-    <Container>
-      <Form className="d-flex gap-5 my-5" onSubmit={handleSubmit}>
-        <Form.Group>
-          <Form.Control
+    <div className="container p-4 bg-light rounded mt-5">
+      <h2 className="text-center text-uppercase">Personal TODO APP</h2>
+
+      <div className="d-flex align-items-center mb-4 gap-3">
+        <input
+          id="addTodoInput"
+          className="form-control p-2 px-3"
+          type="text"
+          placeholder="Add Todo"
+          value={newTodoText}
+          onChange={(e) => setNewTodoText(e.target.value)}
+        />
+        <button
+          className=" btn p-2 bg-primary text-white rounded"
+          // onClick={handleAddTodoClick}
+        >
+          <BsPlus size={20} />
+        </button>
+      </div>
+
+        {/* <FilterButtons /> */}
+
+        <div className="d-flex align-items-center mb-4 gap-3">
+          <input
+            className="form-control p-2 px-3"
             type="text"
-            placeholder="Enter your task"
-            value={task}
-            onChange={(e) => setTask(e.target.value)}
+            placeholder="Search Todos"
+            // value={searchTerm}
+            // onChange={(e) => handleSearchChange(e.target.value)}
           />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Add Task
-        </Button>
-      </Form>
-      <ListGroup>
-        {tasks.map((t) => (
-          <ListGroup.Item
-            key={t.id}
-            className="d-flex justify-content-between align-items-center"
-          >
-            {t.text}
-            <div>
-              <Button variant="danger">Delete</Button>
-              <Button variant="info">Edite</Button>
-            </div>
-          </ListGroup.Item>
-        ))}
-      </ListGroup>
-    </Container>
+          <button className="btn p-2 bg-primary text-white rounded">
+            <BsSearch size={20} />
+          </button>
+        </div>
+
+      {/* <TodoList /> */}
+    </div>
   );
 };
 
