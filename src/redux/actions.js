@@ -11,42 +11,42 @@ export const SEARCH_TODO = "SEARCH_TODO"
 export const addTodo = (text) => {
     return {
         type: ADD_TODO,
-        payload: task,
+        payload: {text},
     };
 };
 
 export const toggleTodo = (id) => {
     return {
         type: TOGGLE_TODO,
-        payload: id
+        payload: {id}
     }
 }
 
 export const deleteTodo = (id) =>{
     return{
         type: DELETE_TODO,
-        payload: id
+        payload: {id}
     }
 }
 
 export const markComplated = (id) =>{
     return{
         type: MARK_COMPLATED,
-        payload: id
+        payload: {id}
     }
 }
 
 export const markIncomplated = (id) =>{
     return{
         type: MARK_INCOMPLATED,
-        payload: id
+        payload: {id}
     }
 }
 
 export const filteredTodos = (filter) =>{
     return{
         type: FILTER_TODOS,
-        payload: filter
+        payload: {filter}
     }
 }
 
@@ -56,9 +56,9 @@ export const markAllcomplated = () =>{
     }
 }
 
-export const searchTodos = (search) =>{
+export const searchTodos = (searchTodo) =>{
     return{
         type: SEARCH_TODO,
-        payload: search
+        payload: searchTodo
     }
 }
